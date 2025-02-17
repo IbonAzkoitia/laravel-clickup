@@ -26,6 +26,10 @@ class Client
             ->timeout(30);
     }
 
+    /**
+     * @param  array<string, string|int|bool|null>  $query
+     * @return array<string, mixed>
+     */
     public function get(string $endpoint, array $query = []): array
     {
         $response = $this->http->get($endpoint, $query);
@@ -33,6 +37,10 @@ class Client
         return $this->handleResponse($response);
     }
 
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
     public function post(string $endpoint, array $data = []): array
     {
         $response = $this->http->post($endpoint, $data);
@@ -40,7 +48,32 @@ class Client
         return $this->handleResponse($response);
     }
 
-    private function handleResponse($response): array
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    public function put(string $endpoint, array $data = []): array
+    {
+        $response = $this->http->put($endpoint, $data);
+
+        return $this->handleResponse($response);
+    }
+
+    /**
+     * @param  array<string, string|int|bool|null>  $query
+     * @return array<string, mixed>
+     */
+    public function delete(string $endpoint, array $query = []): array
+    {
+        $response = $this->http->delete($endpoint, $query);
+
+        return $this->handleResponse($response);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function handleResponse(\Illuminate\Http\Client\Response $response): array
     {
         if ($response->successful()) {
             return $response->json();
@@ -50,9 +83,22 @@ class Client
             401 => throw new AuthenticationException('Invalid authentication credentials'),
             429 => throw new RateLimitException('Rate limit exceeded'),
             default => throw new ClickUpException(
-                $response->json('error') ?? $response->body(),
+                $this->formatErrorMessage($response->json('error'), $response->body()),
                 $response->status()
             ),
         };
+    }
+
+    private function formatErrorMessage(mixed $jsonError, string $bodyFallback): string
+    {
+        if (is_string($jsonError)) {
+            return $jsonError;
+        }
+
+        if (is_array($jsonError) && isset($jsonError['message']) && is_string($jsonError['message'])) {
+            return $jsonError['message'];
+        }
+
+        return $bodyFallback;
     }
 }
