@@ -70,4 +70,4 @@ jobs:
           sed -i "s/CLICKUP_TEST_TEMPLATE_ID=.*/CLICKUP_TEST_TEMPLATE_ID=${CLICKUP_TEST_TEMPLATE_ID}/" .env.testing
 
       - name: Execute tests
-        run: vendor/bin/pest --configuration phpunit.xml.dist --ci
+        run: vendor/bin/pest --configuration phpunit.xml --ci
