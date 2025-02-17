@@ -61,11 +61,32 @@ class Client
 
     /**
      * @param  array<string, string|int|bool|null>  $query
-     * @return array<string, mixed>
      */
-    public function delete(string $endpoint, array $query = []): array
+    public function delete(string $endpoint, array $query = []): bool
     {
         $response = $this->http->delete($endpoint, $query);
+
+        if ($response->successful()) {
+            return true;
+        }
+
+        match ($response->status()) {
+            401 => throw new AuthenticationException('Invalid authentication credentials'),
+            429 => throw new RateLimitException('Rate limit exceeded'),
+            default => throw new ClickUpException(
+                $this->formatErrorMessage($response->json('error'), $response->body()),
+                $response->status()
+            ),
+        };
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    public function patch(string $endpoint, array $data = []): array
+    {
+        $response = $this->http->patch($endpoint, $data);
 
         return $this->handleResponse($response);
     }
