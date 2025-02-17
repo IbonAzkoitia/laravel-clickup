@@ -1,0 +1,73 @@
+{
+    "name": "ibon-azkoitia/laravel-clickup",
+    "description": "Laravel ClickUp API Wrapper",
+    "keywords": [
+        "laravel",
+        "clickup",
+        "ibonazkoitia"
+    ],
+    "homepage": "https://github.com/ibonazkoitia/laravel-clickup",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ibon Azkoitia",
+            "role": "Developer",
+            "homepage": "https://github.com/ibonazkoitia"
+        }
+    ],
+    "require": {
+        "php": "^8.4"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0.2",
+        "laravel/pint": "^1.20",
+        "pestphp/pest": "^3.7.4",
+        "pestphp/pest-plugin-laravel": "^3.1",
+        "rector/rector": "^2.0.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "IbonAzkoitia\\LaravelClickup\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IbonAzkoitia\\LaravelClickup\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@composer run prepare",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "lint": "pint",
+        "refactor": "rector",
+        "test:lint": "pint --test",
+        "test:refactor": "rector --dry-run",
+        "test:types": "phpstan analyse --memory-limit=-1",
+        "test:type-coverage": "pest --type-coverage --min=100",
+        "test:unit": "pest",
+        "test": [
+            "@test:refactor",
+            "@test:lint",
+            "@test:types",
+            "@test:type-coverage",
+            "@test:unit"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IbonAzkoitia\\LaravelClickup\\LaravelClickupServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
