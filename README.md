@@ -27,9 +27,28 @@ php artisan vendor:publish --tag="laravel-clickup-config"
 
 ## Testing
 
+To run the tests, you'll need to set up your test environment:
+
+1. Copy `.env.testing.example` to `.env.testing`
+
+```bash
+cp .env.testing.example .env.testing
+```
+
+2. Update `.env.testing` with your ClickUp test credentials:
+   - `CLICKUP_API_TOKEN`: Your ClickUp API token
+   - `CLICKUP_TEST_LIST_ID`: ID of a list in your ClickUp workspace
+   - `CLICKUP_TEST_TEAM_ID`: Your ClickUp team ID
+   - `CLICKUP_TEST_TASK_ID`: ID of a task in your test list
+   - `CLICKUP_TEST_TEMPLATE_ID`: ID of a template in your test list
+
+3. Run the tests:
+
 ```bash
 composer test
 ```
+
+Note: The `.env.testing` file is gitignored to prevent committing sensitive credentials.
 
 ## Changelog
 
