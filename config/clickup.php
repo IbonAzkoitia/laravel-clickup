@@ -15,6 +15,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | ClickUp OAuth
+    |--------------------------------------------------------------------------
+    |
+    | ID, secret and url to make API requests using OAuth
+    |
+    */
+    'oauth' => [
+        'id' => env('CLICKUP_CLIENT_ID'),
+
+        'secret' => env('CLICKUP_CLIENT_SECRET'),
+
+        'url' => env('CLICKUP_OAUTH_URL', 'https://app.clickup.com/api'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | ClickUp API Base URL
     |--------------------------------------------------------------------------
     |
