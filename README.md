@@ -1,7 +1,7 @@
 # ClickUp for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ibon-azkoitia/laravel-clickup.svg?style=flat-square)](https://packagist.org/packages/ibon-azkoitia/laravel-clickup)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/ibonazkoitia/laravel-clickup/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/ibonazkoitia/laravel-clickup/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/ibonazkoitia/laravel-clickup/run-tests.yml?branch=main&style=flat-square)](https://github.com/ibonazkoitia/laravel-clickup/actions/workflows/run-tests.yml)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/ibonazkoitia/laravel-clickup/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/ibonazkoitia/laravel-clickup/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/ibon-azkoitia/laravel-clickup.svg?style=flat-square)](https://packagist.org/packages/ibon-azkoitia/laravel-clickup)
 
