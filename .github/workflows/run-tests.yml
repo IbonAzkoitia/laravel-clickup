@@ -2,16 +2,16 @@ name: run-tests
 
 on:
   push:
-    paths:
-      - '**.php'
-      - '.github/workflows/run-tests.yml'
-      - 'phpunit.xml'
-      - 'composer.json'
-      - 'composer.lock'
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
+    
+    if: github.event.pull_request.head.repo.full_name == github.repository || github.event_name == 'push'
+
     timeout-minutes: 5
     strategy:
       fail-fast: true
@@ -50,6 +50,21 @@ jobs:
 
       - name: List Installed Dependencies
         run: composer show -D
+
+      - name: Create Testing Environment
+        env:
+          CLICKUP_API_TOKEN: ${{ secrets.CLICKUP_API_TOKEN }}
+          CLICKUP_TEST_LIST_ID: ${{ secrets.CLICKUP_TEST_LIST_ID }}
+          CLICKUP_TEST_TEAM_ID: ${{ secrets.CLICKUP_TEST_TEAM_ID }}
+          CLICKUP_TEST_TASK_ID: ${{ secrets.CLICKUP_TEST_TASK_ID }}
+          CLICKUP_TEST_TEMPLATE_ID: ${{ secrets.CLICKUP_TEST_TEMPLATE_ID }}
+        run: |
+          cp .env.testing.example .env.testing
+          sed -i "s/CLICKUP_API_TOKEN=.*/CLICKUP_API_TOKEN=${CLICKUP_API_TOKEN}/" .env.testing
+          sed -i "s/CLICKUP_TEST_LIST_ID=.*/CLICKUP_TEST_LIST_ID=${CLICKUP_TEST_LIST_ID}/" .env.testing
+          sed -i "s/CLICKUP_TEST_TEAM_ID=.*/CLICKUP_TEST_TEAM_ID=${CLICKUP_TEST_TEAM_ID}/" .env.testing
+          sed -i "s/CLICKUP_TEST_TASK_ID=.*/CLICKUP_TEST_TASK_ID=${CLICKUP_TEST_TASK_ID}/" .env.testing
+          sed -i "s/CLICKUP_TEST_TEMPLATE_ID=.*/CLICKUP_TEST_TEMPLATE_ID=${CLICKUP_TEST_TEMPLATE_ID}/" .env.testing
 
       - name: Execute tests
         run: vendor/bin/pest --configuration phpunit.xml --ci
