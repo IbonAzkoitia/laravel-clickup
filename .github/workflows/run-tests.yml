@@ -2,14 +2,17 @@ name: run-tests
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    paths:
+      - '**.php'
+      - '.github/workflows/run-tests.yml'
+      - 'phpunit.xml'
+      - 'composer.json'
+      - 'composer.lock'
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    
+    runs-on: ${{ matrix.os }}
+
     if: github.event.pull_request.head.repo.full_name == github.repository || github.event_name == 'push'
 
     timeout-minutes: 5
@@ -45,7 +48,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.os == 'windows-latest' && '^' || '' }}${{ matrix.carbon }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.os == 'windows-latest' && '^^^' || '' }}${{ matrix.carbon }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: List Installed Dependencies
@@ -67,4 +70,4 @@ jobs:
           sed -i "s/CLICKUP_TEST_TEMPLATE_ID=.*/CLICKUP_TEST_TEMPLATE_ID=${CLICKUP_TEST_TEMPLATE_ID}/" .env.testing
 
       - name: Execute tests
-        run: vendor/bin/pest --configuration phpunit.xml --ci
+        run: vendor/bin/pest --configuration phpunit.xml.dist --ci
