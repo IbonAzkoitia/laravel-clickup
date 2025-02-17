@@ -4,27 +4,16 @@ declare(strict_types=1);
 
 namespace IbonAzkoitia\LaravelClickup;
 
-use Illuminate\Support\ServiceProvider;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class LaravelClickupServiceProvider extends ServiceProvider
+class LaravelClickupServiceProvider extends PackageServiceProvider
 {
-    public function register(): void
-    {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/clickup.php',
-            'clickup'
-        );
 
-        $this->app->singleton(ClickUp::class, fn ($app): \IbonAzkoitia\LaravelClickup\ClickUp => new ClickUp(
-            config('clickup.api_token'),
-            config('clickup.base_url', 'https://api.clickup.com/api/v2')
-        ));
-    }
-
-    public function boot(): void
+    public function configurePackage(Package $package): void
     {
-        $this->publishes([
-            __DIR__.'/../config/clickup.php' => config_path('clickup.php'),
-        ], 'clickup-config');
+        $package
+            ->name('laravel-clickup')
+            ->hasConfigFile();
     }
 }
