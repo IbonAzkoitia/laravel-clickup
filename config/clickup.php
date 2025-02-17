@@ -18,7 +18,7 @@ return [
     | ClickUp API Base URL
     |--------------------------------------------------------------------------
     |
-    | The base URL for the ClickUp API
+    | The base URL for the ClickUp API. Right now it's v2
     |
     */
     'base_url' => env('CLICKUP_API_URL', 'https://api.clickup.com/api/v2'),
