@@ -87,9 +87,13 @@ class Tasks implements TasksInterface
      */
     public function getBulkTimeInStatus(array $taskIds, array $params = []): array
     {
-        $taskIdsQuery = implode('&', array_map(fn (string $id): string => "task_ids={$id}", $taskIds));
-
-        return $this->client->get("/task/bulk_time_in_status/task_ids?{$taskIdsQuery}", $params);
+        // Convert task IDs array into query parameters format
+        $queryParams = [];
+        foreach ($taskIds as $taskId) {
+            $queryParams['task_ids'][] = $taskId;
+        }
+        
+        return $this->client->get("/task/bulk_time_in_status/task_ids", $queryParams);
     }
 
     /**

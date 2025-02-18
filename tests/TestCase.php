@@ -43,6 +43,7 @@ class TestCase extends Orchestra
             'CLICKUP_TEST_LIST_ID',
             'CLICKUP_TEST_TEAM_ID',
             'CLICKUP_TEST_TASK_ID',
+            'CLICKUP_TEST_TASK_ID_2',
             'CLICKUP_TEST_TEMPLATE_ID',
         ];
 

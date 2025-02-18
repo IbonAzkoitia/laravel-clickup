@@ -41,6 +41,7 @@ cp .env.testing.example .env.testing
    - `CLICKUP_TEST_LIST_ID`: ID of a list in your ClickUp workspace
    - `CLICKUP_TEST_TEAM_ID`: Your ClickUp team ID
    - `CLICKUP_TEST_TASK_ID`: ID of a task in your test list
+   - `CLICKUP_TEST_TASK_ID_2`: ID of another task in your test list
    - `CLICKUP_TEST_TEMPLATE_ID`: ID of a template in your test list
 
 3. Run the tests:

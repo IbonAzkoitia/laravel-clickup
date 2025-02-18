@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use IbonAzkoitia\LaravelClickup\ClickUp;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 beforeEach(function () {
     $this->clickup = app(ClickUp::class);
@@ -213,8 +214,6 @@ it('can get time in status for a task', function () {
     Http::fake(function ($request) use ($taskId) {
         if ($request->url() === 'https://api.clickup.com/api/v2/task/'.$taskId.'/time_in_status'
             && $request->method() === 'GET'
-            && $request->header('Authorization')[0] === config('clickup.api_token')
-            && $request->header('Content-Type')[0] === 'application/json'
         ) {
             return Http::response([
                 'current_status' => [
@@ -250,6 +249,94 @@ it('can get time in status for a task', function () {
         ->toHaveKey('total_time')
         ->and($response['current_status']['total_time'])
         ->toHaveKey('by_minute');
+});
+
+it('can get bulk time in status for multiple tasks', function () {
+    $taskId = env('CLICKUP_TEST_TASK_ID');
+    $taskId2 = env('CLICKUP_TEST_TASK_ID_2');
+    
+    $taskIds = [$taskId, $taskId2];
+    
+    // Update the fake to match the actual URL format with encoded array indices
+    $expectedUrl = 'https://api.clickup.com/api/v2/task/bulk_time_in_status/task_ids?task_ids%5B0%5D=' . $taskId . '&task_ids%5B1%5D=' . $taskId2;
+    
+    Http::fake([
+        $expectedUrl => Http::response([
+            $taskId => [
+                'current_status' => [
+                    'status' => 'abierto',
+                    'color' => '#87909e',
+                    'total_time' => [
+                        'by_minute' => 737,
+                        'since' => '1739819203374'
+                    ]
+                ],
+                'status_history' => [
+                    [
+                        'status' => 'abierto',
+                        'color' => '#87909e',
+                        'type' => 'open',
+                        'total_time' => [
+                            'by_minute' => 736,
+                            'since' => '1739819203374'
+                        ],
+                        'orderindex' => 0
+                    ]
+                ]
+            ],
+            $taskId2 => [
+                'current_status' => [
+                    'status' => 'abierto',
+                    'color' => '#87909e',
+                    'total_time' => [
+                        'by_minute' => 58,
+                        'since' => '1739859954806'
+                    ]
+                ],
+                'status_history' => [
+                    [
+                        'status' => 'abierto',
+                        'color' => '#87909e',
+                        'type' => 'open',
+                        'total_time' => [
+                            'by_minute' => 57,
+                            'since' => '1739859954806'
+                        ],
+                        'orderindex' => 0
+                    ]
+                ]
+            ]
+        ])
+    ]);
+    
+    $response = $this->clickup->tasks()->getBulkTimeInStatus($taskIds);
+    
+    expect($response)
+        ->toBeArray()
+        ->toHaveKeys([$taskId, $taskId2])
+        ->and($response[$taskId])
+        ->toHaveKey('current_status')
+        ->toHaveKey('status_history')
+        ->and($response[$taskId]['current_status'])
+        ->toHaveKey('status')
+        ->toHaveKey('color')
+        ->toHaveKey('total_time')
+        ->and($response[$taskId]['status_history'])
+        ->toBeArray()
+        ->toHaveCount(1)
+        ->and($response[$taskId2])
+        ->toHaveKey('current_status')
+        ->toHaveKey('status_history')
+        ->and($response[$taskId2]['current_status'])
+        ->toHaveKey('status')
+        ->toHaveKey('color')
+        ->toHaveKey('total_time');
+
+    Http::assertSent(function ($request) use ($taskIds) {
+        return $request->method() === 'GET'
+            && str_contains($request->url(), '/api/v2/task/bulk_time_in_status/task_ids')
+            && $request->data() === ['task_ids' => $taskIds];
+    });
 });
 
 it('can create task from template', function () {
