@@ -6,6 +6,7 @@ namespace IbonAzkoitia\LaravelClickup\Services;
 
 use IbonAzkoitia\LaravelClickup\Contracts\TasksInterface;
 use IbonAzkoitia\LaravelClickup\Http\Client;
+use IbonAzkoitia\LaravelClickup\Resources\TaskResource;
 
 class Tasks implements TasksInterface
 {
@@ -19,7 +20,11 @@ class Tasks implements TasksInterface
      */
     public function list(string $listId, array $params = []): array
     {
-        return $this->client->get("/list/{$listId}/task", $params);
+        $response = $this->client->get("/list/{$listId}/task", $params);
+
+        return [
+            'tasks' => TaskResource::collection($response['tasks']),
+        ];
     }
 
     /**
@@ -28,7 +33,9 @@ class Tasks implements TasksInterface
      */
     public function create(string $listId, array $data): array
     {
-        return $this->client->post("/list/{$listId}/task", $data);
+        $response = $this->client->post("/list/{$listId}/task", $data);
+
+        return (new TaskResource($response))->toArray();
     }
 
     /**
@@ -36,7 +43,9 @@ class Tasks implements TasksInterface
      */
     public function get(string $taskId): array
     {
-        return $this->client->get("/task/{$taskId}");
+        $response = $this->client->get("/task/{$taskId}");
+
+        return (new TaskResource($response))->toArray();
     }
 
     /**
