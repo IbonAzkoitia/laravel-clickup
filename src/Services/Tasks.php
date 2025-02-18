@@ -92,8 +92,8 @@ class Tasks implements TasksInterface
         foreach ($taskIds as $taskId) {
             $queryParams['task_ids'][] = $taskId;
         }
-        
-        return $this->client->get("/task/bulk_time_in_status/task_ids", $queryParams);
+
+        return $this->client->get('/task/bulk_time_in_status/task_ids', $queryParams);
     }
 
     /**

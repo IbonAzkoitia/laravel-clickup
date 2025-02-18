@@ -4,9 +4,6 @@ namespace IbonAzkoitia\LaravelClickup\Tests\Unit\Http;
 
 use IbonAzkoitia\LaravelClickup\ClickUp;
 use IbonAzkoitia\LaravelClickup\Exceptions\AuthenticationException;
-use IbonAzkoitia\LaravelClickup\Exceptions\ClickUpException;
-use IbonAzkoitia\LaravelClickup\Exceptions\RateLimitException;
-use IbonAzkoitia\LaravelClickup\Http\Client;
 use Illuminate\Support\Facades\Http;
 
 beforeEach(function () {
@@ -29,4 +26,3 @@ it('throws authentication exception on 401 response', function () {
 
     $this->clickup->tasks()->list($this->listId);
 })->throws(AuthenticationException::class, 'Invalid authentication credentials');
-
