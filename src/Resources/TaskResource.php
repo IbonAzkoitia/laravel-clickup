@@ -9,7 +9,7 @@ namespace IbonAzkoitia\LaravelClickup\Resources;
  *
  * Fields are ordered to match the ClickUp API documentation:
  *
- * @see https://clickup.com/api/clickupreference/operation/GetTask/
+ * @see https://developer.clickup.com/reference/gettasks
  */
 class TaskResource
 {
