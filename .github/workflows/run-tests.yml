@@ -60,6 +60,7 @@ jobs:
           CLICKUP_TEST_LIST_ID: ${{ secrets.CLICKUP_TEST_LIST_ID }}
           CLICKUP_TEST_TEAM_ID: ${{ secrets.CLICKUP_TEST_TEAM_ID }}
           CLICKUP_TEST_TASK_ID: ${{ secrets.CLICKUP_TEST_TASK_ID }}
+          CLICKUP_TEST_TASK_ID_2: ${{ secrets.CLICKUP_TEST_TASK_ID_2 }}
           CLICKUP_TEST_TEMPLATE_ID: ${{ secrets.CLICKUP_TEST_TEMPLATE_ID }}
         run: |
           cp .env.testing.example .env.testing
@@ -67,6 +68,7 @@ jobs:
           sed -i "s/CLICKUP_TEST_LIST_ID=.*/CLICKUP_TEST_LIST_ID=${CLICKUP_TEST_LIST_ID}/" .env.testing
           sed -i "s/CLICKUP_TEST_TEAM_ID=.*/CLICKUP_TEST_TEAM_ID=${CLICKUP_TEST_TEAM_ID}/" .env.testing
           sed -i "s/CLICKUP_TEST_TASK_ID=.*/CLICKUP_TEST_TASK_ID=${CLICKUP_TEST_TASK_ID}/" .env.testing
+          sed -i "s/CLICKUP_TEST_TASK_ID_2=.*/CLICKUP_TEST_TASK_ID_2=${CLICKUP_TEST_TASK_ID_2}/" .env.testing
           sed -i "s/CLICKUP_TEST_TEMPLATE_ID=.*/CLICKUP_TEST_TEMPLATE_ID=${CLICKUP_TEST_TEMPLATE_ID}/" .env.testing
 
       - name: Execute tests
