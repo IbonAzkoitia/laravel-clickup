@@ -22,7 +22,7 @@ composer require ibon-azkoitia/laravel-clickup
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-clickup-config"
+php artisan vendor:publish --tag="clickup-config"
 ```
 
 ## Testing
