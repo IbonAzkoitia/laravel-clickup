@@ -2,9 +2,9 @@
 
 namespace IbonAzkoitia\LaravelClickup;
 
+use IbonAzkoitia\LaravelClickup\Commands\LaravelClickupCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use IbonAzkoitia\LaravelClickup\Commands\LaravelClickupCommand;
 
 class LaravelClickupServiceProvider extends PackageServiceProvider
 {

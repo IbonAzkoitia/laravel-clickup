@@ -2,9 +2,9 @@
 
 namespace IbonAzkoitia\LaravelClickup\Tests;
 
+use IbonAzkoitia\LaravelClickup\LaravelClickupServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use IbonAzkoitia\LaravelClickup\LaravelClickupServiceProvider;
 
 class TestCase extends Orchestra
 {
