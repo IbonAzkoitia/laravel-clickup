@@ -17,9 +17,9 @@ class ClickupServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-clickup')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_clickup_table')
-            ->hasCommand(ClickupCommand::class);
+            ->hasConfigFile();
+        // ->hasViews()
+        // ->hasMigration('create_clickup_table')
+        // ->hasCommand(ClickupCommand::class);
     }
 }

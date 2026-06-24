@@ -1,5 +1,10 @@
 <?php
 
+use IbonAzkoitia\Clickup\Commands\ClickupCommand;
+use Illuminate\Console\Command;
+
+use function Pest\Laravel\artisan;
+
 it('can test', function () {
-    expect(true)->toBeTrue();
+    artisan(ClickupCommand::class)->assertExitCode(Command::SUCCESS);
 });
