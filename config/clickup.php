@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /*
@@ -11,7 +13,7 @@ return [
     |
     */
 
-    'api_token' => env('CLICKUP_API_TOKEN'),
+    'api_token' => env('CLICKUP_API_TOKEN', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +53,7 @@ return [
     |
     */
 
-    'workspace_id' => env('CLICKUP_WORKSPACE_ID'),
+    'workspace_id' => env('CLICKUP_WORKSPACE_ID', '2519199'),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,5 +66,10 @@ return [
     |
     */
 
-    'test_list_id' => env('CLICKUP_TEST_LIST_ID'),
+    'test' => [
+        'space_id' => env('CLICKUP_TEST_SPACE_ID'),
+        'folder_id' => env('CLICKUP_TEST_FOLDER_ID'),
+        'list_id' => env('CLICKUP_TEST_LIST_ID'),
+    ],
+
 ];
