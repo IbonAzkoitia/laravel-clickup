@@ -1,8 +1,12 @@
 <?php
 
-namespace IbonAzkoitia\LaravelClickup\Tests;
+namespace IbonAzkoitia\Clickup\Tests;
 
+<<<<<<< HEAD
 use IbonAzkoitia\LaravelClickup\LaravelClickupServiceProvider;
+=======
+use IbonAzkoitia\Clickup\ClickupServiceProvider;
+>>>>>>> fb17f90 (change name from LaravelClickup to Clickup)
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -13,14 +17,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'IbonAzkoitia\\LaravelClickup\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'IbonAzkoitia\\Clickup\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            LaravelClickupServiceProvider::class,
+            ClickupServiceProvider::class,
         ];
     }
 

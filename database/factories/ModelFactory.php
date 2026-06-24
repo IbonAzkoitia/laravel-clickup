@@ -1,6 +1,6 @@
 <?php
 
-namespace IbonAzkoitia\LaravelClickup\Database\Factories;
+namespace IbonAzkoitia\Clickup\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

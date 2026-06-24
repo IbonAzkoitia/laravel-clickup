@@ -1,12 +1,12 @@
 <?php
 
-namespace IbonAzkoitia\LaravelClickup\Commands;
+namespace IbonAzkoitia\Clickup\Commands;
 
 use Illuminate\Console\Command;
 
-class LaravelClickupCommand extends Command
+class ClickupCommand extends Command
 {
-    public $signature = 'laravel-clickup';
+    public $signature = 'clickup';
 
     public $description = 'My command';
 

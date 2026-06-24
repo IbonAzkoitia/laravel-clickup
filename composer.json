@@ -34,13 +34,13 @@
     },
     "autoload": {
         "psr-4": {
-            "IbonAzkoitia\\LaravelClickup\\": "src/",
-            "IbonAzkoitia\\LaravelClickup\\Database\\Factories\\": "database/factories/"
+            "IbonAzkoitia\\Clickup\\": "src/",
+            "IbonAzkoitia\\Clickup\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "IbonAzkoitia\\LaravelClickup\\Tests\\": "tests/",
+            "IbonAzkoitia\\Clickup\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -62,10 +62,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "IbonAzkoitia\\LaravelClickup\\LaravelClickupServiceProvider"
+                "IbonAzkoitia\\Clickup\\ClickupServiceProvider"
             ],
             "aliases": {
-                "LaravelClickup": "IbonAzkoitia\\LaravelClickup\\Facades\\LaravelClickup"
+                "Clickup": "IbonAzkoitia\\Clickup\\Facades\\Clickup"
             }
         }
     },

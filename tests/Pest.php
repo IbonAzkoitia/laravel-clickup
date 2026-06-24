@@ -1,5 +1,5 @@
 <?php
 
-use IbonAzkoitia\LaravelClickup\Tests\TestCase;
+use IbonAzkoitia\Clickup\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

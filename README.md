@@ -52,8 +52,8 @@ php artisan vendor:publish --tag="laravel-clickup-views"
 ## Usage
 
 ```php
-$laravelClickup = new IbonAzkoitia\LaravelClickup();
-echo $laravelClickup->echoPhrase('Hello, IbonAzkoitia!');
+$clickup = new IbonAzkoitia\Clickup();
+echo $clickup->echoPhrase('Hello, IbonAzkoitia!');
 ```
 
 ## Testing

@@ -1,6 +1,6 @@
 <?php
 
-// config for IbonAzkoitia/LaravelClickup
+// config for IbonAzkoitia/Clickup
 return [
 
 ];
