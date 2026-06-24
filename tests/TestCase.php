@@ -2,11 +2,7 @@
 
 namespace IbonAzkoitia\Clickup\Tests;
 
-<<<<<<< HEAD
-use IbonAzkoitia\LaravelClickup\LaravelClickupServiceProvider;
-=======
 use IbonAzkoitia\Clickup\ClickupServiceProvider;
->>>>>>> fb17f90 (change name from LaravelClickup to Clickup)
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 
