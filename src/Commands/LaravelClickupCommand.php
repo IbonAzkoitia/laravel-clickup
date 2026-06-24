@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace IbonAzkoitia\LaravelClickup\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelClickupCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-clickup';
 
     public $description = 'My command';
 
