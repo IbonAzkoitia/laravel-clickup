@@ -52,4 +52,17 @@ return [
     */
 
     'workspace_id' => env('CLICKUP_WORKSPACE_ID'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | ClickUp Test List ID
+    |--------------------------------------------------------------------------
+    |
+    | The problem of testing with external APIs, is that you are working directly
+    | in production. In this configuration, you can define a custom Tests List
+    | ClickUp and add here the ID so you can use that list just for tests.
+    |
+    */
+
+    'test_list_id' => env('CLICKUP_TEST_LIST_ID'),
 ];
