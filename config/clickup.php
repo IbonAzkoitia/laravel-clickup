@@ -53,7 +53,7 @@ return [
     |
     */
 
-    'workspace_id' => env('CLICKUP_WORKSPACE_ID', '2519199'),
+    'workspace_id' => env('CLICKUP_WORKSPACE_ID'),
 
     /*
     |--------------------------------------------------------------------------
